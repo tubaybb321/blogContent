@@ -1,0 +1,211 @@
+Title: Initial Blog Set Up
+Date: 2014-12-19 11:10
+Category: Blog notes
+
+# Initial experiment with Pelican blogging system
+
+
+I started by installing Pelican and Markdown, since I intended to write my Pelican content in Markdown:
+
+    ::::Text only
+    me@Bedrock1:~/Projects/PelicanProjects$ pip install Pelican
+    Requirement already satisfied (use --upgrade to upgrade): Pelican in /usr/local/lib/python2.7/dist-packages
+    Cleaning up...
+    me@Bedrock1:~/Projects/PelicanProjects$ pip install Markdown
+    Requirement already satisfied (use --upgrade to upgrade): Markdown in /usr/local/lib/python2.7/dist-packages
+    Cleaning up...
+
+(OK - they were already installed before I wrote this entry, but such is life)
+
+Next, I created the directory where the blog content and blog
+support/creation files would live 
+
+    ::::Text only
+    me@Bedrock1:~/Projects/PelicanProjects$ mkdir test1
+    me@Bedrock1:~/Projects/PelicanProjects$ cd ./test1
+
+The creation of the blog was then handled by running the
+*pelican-quickstart* command. This created the directory structure in
+which the blog would live and asked a series of questions that helped
+create the configuration files (pelicanconf.py & publishconf.py) and
+files to help speed standard tasks for creating blog entries and
+publishing them (Makefile & fabfile.py - I will be using Makefile). It
+will also create a directory for content and one 
+
+    ::::Text only
+    me@Bedrock1:~/Projects/PelicanProjects/test2$ pelican-quickstart
+    Welcome to pelican-quickstart v3.5.0.
+
+    This script will help you create a new Pelican-based website.
+
+    Please answer the following questions so this script can generate the files
+    needed by Pelican.
+
+    
+    > Where do you want to create your new web site? [.] ./
+    > What will be the title of this web site? Notes To Self
+    > Who will be the author of this web site? Moonshine Mulligan
+    > What will be the default language of this web site? [en] 
+    > Do you want to specify a URL prefix? e.g., http://example.com   (Y/n) Y
+    > What is your URL prefix? (see above example; no trailing slash)  http://tubaybb321.github.io
+    > Do you want to enable article pagination? (Y/n) 
+    > How many articles per page do you want? [10] 
+    > Do you want to generate a Fabfile/Makefile to automate generation and publishing? (Y/n) 
+    > Do you want an auto-reload & simpleHTTP script to assist with theme and site development? (Y/n) 
+    > Do you want to upload your website using FTP? (y/N) 
+    > Do you want to upload your website using SSH? (y/N) 
+    > Do you want to upload your website using Dropbox? (y/N) 
+    > Do you want to upload your website using S3? (y/N) 
+    > Do you want to upload your website using Rackspace Cloud Files? (y/N) 
+    > Do you want to upload your website using GitHub Pages? (y/N) y
+    > Is this your personal page (username.github.io)? (y/N) y
+    Done. Your new project is available at /home/me/Projects/PelicanProjects/test1
+
+This process will create the following directory structure:
+
+    
+    ::::Text only
+    me@Bedrock1:~/Projects/PelicanProjects/test2$ ls ./content
+    me@Bedrock1:~/Projects/PelicanProjects/test2$ tree
+    .
+    ├── content
+    ├── develop_server.sh
+    ├── fabfile.py
+    ├── Makefile
+    ├── output
+    ├── pelicanconf.py
+    └── publishconf.py
+
+    2 directories, 5 files
+
+Now, I can test my blog on localhost to see a blank entry and convince
+myself that the machinery of the blog is working, by using one of the
+commands from the Makefile:
+
+    
+    ::::Text only
+    me@Bedrock1:~/Projects/PelicanProjects/test2$ make serve
+    cd /home/me/Projects/PelicanProjects/test2/output && python -m pelican.server
+    127.0.0.1 - - [19/Dec/2014 22:03:34] "GET / HTTP/1.1" 200 -
+    WARNING:root:Unable to find file /favicon.ico/index.html or variations.
+    WARNING:root:Unable to find file /favicon.ico/index.html or variations.
+       C-c C-cmake: *** [serve] Interrupt
+
+Next, I wanted to create a GitHub repository. Since this was not going
+to be associated with a project, I decided to use a GitHub user page.
+
+
+     ::::Text only
+     me@Bedrock1:~/Projects/PelicanProjects/test1$ git init
+     Initialized empty Git repository in /home/me/Projects/PelicanProjects/test1/.git/
+     me@Bedrock1:~/Projects/PelicanProjects/test1$ git remote add origin https://github.com/tubaybb321/tubaybb321.github.io.git
+     me@Bedrock1:~/Projects/PelicanProjects/test1$ git add ./output
+     me@Bedrock1:~/Projects/PelicanProjects/test1$ git status
+     On branch master
+      
+     Initial commit
+     
+     Changes to be committed:
+        (use "git rm --cached <file>..." to unstage)
+      
+        	new file:   output/archives.html
+	        new file:   output/author/moonshine-mulligan.html
+        	new file:   output/authors.html
+        	new file:   output/categories.html
+        	new file:   output/category/blog-notes.html
+        	new file:   output/feeds/all.atom.xml
+        	new file:   output/feeds/blog-notes.atom.xml
+	        new file:   output/index.html
+        	new file:   output/initial-blog-set-up.html
+	        new file:   output/tags.html
+	        new file:   output/theme/css/main.css
+	        new file:   output/theme/css/pygment.css
+	        new file:   output/theme/css/reset.css
+	        new file:   output/theme/css/typogrify.css
+	        new file:   output/theme/css/wide.css
+	        new file:   output/theme/images/icons/aboutme.png
+	        new file:   output/theme/images/icons/bitbucket.png
+	        new file:   output/theme/images/icons/delicious.png
+	        new file:   output/theme/images/icons/facebook.png
+	        new file:   output/theme/images/icons/github.png
+	        new file:   output/theme/images/icons/gitorious.png
+	        new file:   output/theme/images/icons/gittip.png
+	        new file:   output/theme/images/icons/google-groups.png
+	        new file:   output/theme/images/icons/google-plus.png
+	        new file:   output/theme/images/icons/hackernews.png
+	        new file:   output/theme/images/icons/lastfm.png
+        	new file:   output/theme/images/icons/linkedin.png
+        	new file:   output/theme/images/icons/reddit.png
+        	new file:   output/theme/images/icons/rss.png
+	        new file:   output/theme/images/icons/slideshare.png
+	        new file:   output/theme/images/icons/speakerdeck.png
+	        new file:   output/theme/images/icons/stackoverflow.png
+	        new file:   output/theme/images/icons/twitter.png
+	        new file:   output/theme/images/icons/vimeo.png
+	        new file:   output/theme/images/icons/youtube.png
+       
+      Untracked files:
+        (use "git add <file>..." to include in what will be committed)
+      
+        	Makefile 
+        	cache/
+        	content/ 
+        	develop_server.sh
+        	fabfile.py
+         	pelican.pid
+        	pelicanconf.py
+        	pelicanconf.pyc
+	        publishconf.py
+	        publishconf.pyc
+	        srv.pid
+
+     me@Bedrock1:~/Projects/PelicanProjects/test1$ git commit -m "Initialize blog repository"
+     [master (root-commit) 00c4a86] Initialize blog repository
+      35 files changed, 1748 insertions(+)
+      create mode 100644 output/archives.html
+      create mode 100644 output/author/moonshine-mulligan.html
+      create mode 100644 output/authors.html
+      create mode 100644 output/categories.html
+      create mode 100644 output/category/blog-notes.html
+      create mode 100644 output/feeds/all.atom.xml
+      create mode 100644 output/feeds/blog-notes.atom.xml
+      create mode 100644 output/index.html
+      create mode 100644 output/initial-blog-set-up.html
+      create mode 100644 output/tags.html
+      create mode 100644 output/theme/css/main.css
+      create mode 100644 output/theme/css/pygment.css
+      create mode 100644 output/theme/css/reset.css
+      create mode 100644 output/theme/css/typogrify.css
+      create mode 100644 output/theme/css/wide.css
+      create mode 100644 output/theme/images/icons/aboutme.png
+      create mode 100644 output/theme/images/icons/bitbucket.png
+      create mode 100644 output/theme/images/icons/delicious.png
+      create mode 100644 output/theme/images/icons/facebook.png
+      create mode 100644 output/theme/images/icons/github.png
+      create mode 100644 output/theme/images/icons/gitorious.png
+      create mode 100644 output/theme/images/icons/gittip.png
+      create mode 100644 output/theme/images/icons/google-groups.png
+      create mode 100644 output/theme/images/icons/google-plus.png
+      create mode 100644 output/theme/images/icons/hackernews.png
+      create mode 100644 output/theme/images/icons/lastfm.png
+      create mode 100644 output/theme/images/icons/linkedin.png
+      create mode 100644 output/theme/images/icons/reddit.png
+      create mode 100644 output/theme/images/icons/rss.png
+      create mode 100644 output/theme/images/icons/slideshare.png
+      create mode 100644 output/theme/images/icons/speakerdeck.png
+      create mode 100644 output/theme/images/icons/stackoverflow.png
+      create mode 100644 output/theme/images/icons/twitter.png
+      create mode 100644 output/theme/images/icons/vimeo.png
+      create mode 100644 output/theme/images/icons/youtube.png
+     me@Bedrock1:~/Projects/PelicanProjects/test1$ git push origin master 
+     Username for 'https://github.com': tubaybb321
+     Password for 'https://tubaybb321@github.com': 
+     
+     Counting objects: 45, done.
+     Delta compression using up to 8 threads.
+     Compressing objects: 100% (42/42), done.
+     Writing objects: 100% (45/45), 26.44 KiB | 0 bytes/s, done.
+     Total 45 (delta 10), reused 0 (delta 0)
+     To https://github.com/tubaybb321/tubaybb321.github.io.git
+      * [new branch]      master -> master
+     me@Bedrock1:~/Projects/PelicanProjects/test1$ 
