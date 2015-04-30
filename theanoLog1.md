@@ -1,4 +1,4 @@
-Title: Theano Unittesting
+Title: Theano Scan Function-V2
 Date: 2015-01-10 11:10
 Category: Theano Notes
 
